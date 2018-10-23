@@ -1,6 +1,6 @@
 # SmartIoTLab
 
-This are some temporary program files that were created while working on creating a smart energy saving system for our IoT Lab.
+These are some temporary program files that were created while working on creating a smart energy saving system for our IoT Lab.
 As of now we have a motion sensor connected to ESP32 on which pubsub MQTT client library is added that sends the command to the 
 Raspberry Pi based on the meeting of specific condition. Raspberry Pi acts as a controller/gateway in this scenario which is 
 responsible for sending/receing command to/from different sensor nodes. One sensor node reads motion sensor data and then
