@@ -20,10 +20,10 @@ the information about when the light was turned on or off in the influx db datab
 * Employing data mining techniques to perform edge data analytics
 * Exploring security paradigms for Smart Home
 
-**##Architecture**
+##Architecture
 
 ![picture](Images/Smart_IoT_Lab_Architecture.jpg)
 
-**##Design**
+##Design
 
 ![picture](Images/Smart_IoT_Lab_layout.jpg)
