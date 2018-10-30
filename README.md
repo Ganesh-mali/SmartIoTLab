@@ -10,9 +10,7 @@ node based on ESP32 to which a 100 W lightbulb is connected to via a relay. It r
 switch off the light and accordingly it makes or breaks the circuit of the load using relay. The controller device also strore
 the information about when the light was turned on or off in the influx db database.
 
-Smart IoT Lab
-
-Objective
+##Objective
 * To automatically monitor and control appliances based on human presence in the lab.
 * Design power efficient sensor nodes for monitoring different parameters like temperature, humidity, light intensity and motion.
 * Performing modeling and simulation of fog computing framework for Smart Lab automation system.
@@ -22,9 +20,10 @@ Objective
 * Employing data mining techniques to perform edge data analytics
 * Exploring security paradigms for Smart Home
 
-Architecture
+##**Architecture**
+
 ![picture](Images/Smart_IoT_Lab_Architecture.jpg)
 
-Design
+##**Design**
 
 ![picture](Images/Smart_IoT_Lab_layout.jpg)
