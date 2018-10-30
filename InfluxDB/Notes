@@ -1,0 +1,12 @@
+docker exec -it influxdb /usr/bin/bash
+docker exec -it influxdb /usr/bin/influx
+CREATE DATABASE smartiotlab
+> use smartiotlab
+show measuremeants
+	
+
+CREATE USER root WITH PASSWORD 'grafana123' WITH ALL PRIVILEGES
+> DROP USER root
+> CREATE USER root WITH PASSWORD 'influx123' WITH ALL PRIVILEGES
+> GRANT ALL PRIVILEGES TO root
+
