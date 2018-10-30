@@ -23,7 +23,7 @@ Objective
 * Exploring security paradigms for Smart Home
 
 Architecture
-
+![picture](images/Smart_IoT_Lab_Architecture.jpg)
 
 Design
 
