@@ -9,7 +9,7 @@ def on_message(client, userdata, msg):
 client = paho.Client()
 client.on_subscribe = on_subscribe
 client.on_message = on_message
+client.username_pw_set("john","john123")
 client.connect("172.18.22.9", 1884)
-client.subscribe("all", qos=1)
- 
+client.subscribe("bazi", qos=1) 
 client.loop_forever()
