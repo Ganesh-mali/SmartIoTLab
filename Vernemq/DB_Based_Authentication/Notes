@@ -1,0 +1,36 @@
+INSERT INTO vmq_auth_acl 
+    (mountpoint, client_id, username, 
+     password, publish_acl, subscribe_acl)
+VALUES 
+    ('', 'test-client', 'test-user', PASSWORD('123'), 
+     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]', 
+     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]');
+
+INSERT INTO vmq_auth_acl 
+    (mountpoint, client_id, username, 
+     password, publish_acl, subscribe_acl)
+VALUES 
+    ('', 'test-client1', 'test-user1', '123', 
+     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]', 
+     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]');
+
+Error
+root@01ab84df4681:/# vmq-admin trace client clientid=test-client1
+Invalid key: "clientid"
+root@01ab84df4681:/# vmq-admin trace client client-id=test-client1
+No sessions found for client "test-client1"
+^C
+Session terminated, terminating shell... ...terminated.
+root@01ab84df4681:/# vmq-admin trace client client-id=test-client1
+No sessions found for client "test-client1"
+New session with PID <7251.476.0> found for client "test-client1"
+<7251.476.0> MQTT RECV: CID: "test-client1" CONNECT(c: test-client1, v: 4, u: test-user1, p: 123, cs: 1, ka: 60)
+<7251.476.0> Trace session for test-client1 stopped
+New session with PID <7251.477.0> found for client "test-client1"
+<7251.477.0> MQTT RECV: CID: "test-client1" CONNECT(c: test-client1, v: 4, u: test-user1, p: 123, cs: 1, ka: 60)
+<7251.477.0> Calling auth_on_register({{172,18,22,10},51724},{[],
+                                                              <<"test-client1">>},test-user1,123,true) 
+<7251.477.0> Hook returned {error,no_matching_hook_found}
+<7251.477.0> MQTT SEND: CID: "test-client1" CONNACK(sp: 0, rc: 5)
+<7251.477.0> Trace session for test-client1 stopped
+

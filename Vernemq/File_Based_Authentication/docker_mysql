@@ -1,0 +1,1 @@
+docker run --name mysql -v /var/lib/mysqldata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag

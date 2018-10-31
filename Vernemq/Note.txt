@@ -1,6 +1,6 @@
 Running the vernemq docker
 docker run -e "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on" -p 1884:1883 -p 8889:8888 -p 8081:8080 --name vernemq1 -d erlio/docker-vernemq
-
+docker run -p 1884:1883 -p 8884:8883 -p 8081:8080 --name vernemq1 -d erlio/docker-vernemq
 g5H63JKd87M9Kiu2EyMixrAc1QrifLFG API Key
 
 curl http://g5H63JKd87M9Kiu2EyMixrAc1QrifLFG@172.18.22.9:8889/api/v1/session/show
