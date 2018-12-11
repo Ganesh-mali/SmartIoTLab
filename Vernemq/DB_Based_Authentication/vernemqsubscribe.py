@@ -10,6 +10,6 @@ client = paho.Client(client_id="test-client",clean_session=True)
 client.on_subscribe = on_subscribe
 client.on_message = on_message
 client.username_pw_set("test-user","123")
-client.connect("172.18.22.9", 1884)
+client.connect("172.18.22.9", 1886)
 client.subscribe("a/b/c", qos=1) 
 client.loop_forever()
