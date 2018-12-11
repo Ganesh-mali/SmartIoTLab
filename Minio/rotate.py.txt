@@ -1,0 +1,7 @@
+from scipy import ndimage
+from PIL import Image
+
+im1 = Image.open(r"C:\Users\Dhanshree\Downloads\newimagenone1.jpeg")
+im1 = ndimage.rotate(im1, 90)
+im = Image.fromarray(im1)
+im.save("rotated_file.jpeg")
