@@ -1,3 +1,7 @@
+//This program is run at the controller(ESP-32) 
+//In this program an MQTT client is created and it subscribes to the topic on which the gateway publishes the command to 
+//switch ON/OFF the appliance.
+//Relay is connected at the Pin 15 of the controller(ESP32 in this case)
 #include <SPI.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
@@ -13,19 +17,19 @@ String buildClientName (){
 }
 int ssrControlPin = 15;
 // WiFi Login
-char ssid[] = "CSRIOTLab3Gateway";      //  your network SSID (name)
-char pass[] = "csr10t1ab3";             // your network password
+char ssid[] = "CSR_IOT_LAB";      //  your network SSID (name)
+char pass[] = "csr10t1ab1369";             // your network password
 
 // IBM Bluemix Info
 char orgName[] = "1ryln5";      // Your org name, found under the "Credentials" area in your Bluemix dashboard.
 char macstr[] = "Arduino"; // The MAC address of your Arduino gadget, update this to match your own.
-char server[] = "192.168.4.1"; // MQTT Host (taken from Bluemix dashboard)
+char server[] = "172.18.22.9"; // MQTT Host (taken from Bluemix dashboard)
 char type[] = "ArduinoGateway";    // Type of device you have registered in the IBM Bluemix Devices area.
 char token[] = "srinivas"; // Token issued when you first register your IoT device (only appears once)
-int port = 1883;
+int port = 1886;
 
 String clientName = buildClientName();
-String topicName = String("vjti/csriot/lab3/act1"); // Topic
+String topicName = String("a/b/c"); // Topic
 
 // WiFi connection
 WiFiClient wifiClient;
@@ -63,7 +67,7 @@ void reconnect() {
   clientName.toCharArray(clientStr,34);
   Serial.print("Trying to connect to: ");
     Serial.println(clientStr);
- client.connect(clientStr, "use-token-auth", token);
+ client.connect("test-client1", "test-user1", "123");
  if (client.connected()) {
   char topicStr[28];
   topicName.toCharArray(topicStr,28);
@@ -94,4 +98,3 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 }
-
