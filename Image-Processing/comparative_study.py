@@ -10,12 +10,12 @@ from ip_functions import combine,annotate,save
 #     4. Finally it applied morphological transformation on the image obtained in setp 3
 # =============================================================================
 def function1():
-    img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\1.jpeg",0)
-    img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\2.jpeg",0)
-    rgb_img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\1.jpeg",1)
-    rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\2.jpeg",1)
+    img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\1.jpeg",0)
+    img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\2.jpeg",0)
+    rgb_img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\1.jpeg",1)
+    rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\2.jpeg",1)
     
-    combine(rgb_img1,rgb_img2,"Set8-Combined-RGB")
+    combine(rgb_img1,rgb_img2,"Set9-Combined-RGB")
     
     thresh2 = cv2.adaptiveThreshold(img1,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
             cv2.THRESH_BINARY,11,2)
@@ -26,7 +26,7 @@ def function1():
     
     for i in range(2,6):
         for j in range(1,3):
-            rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\2.jpeg",1)
+            rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\2.jpeg",1)
             opening(i,j,diff,rgb_img2,"Method-1")
 
 # =============================================================================
@@ -37,21 +37,21 @@ def function1():
 #     4. Finally it applied morphological transformation on the image
 # =============================================================================
 def function2():
-    img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\1.jpeg",0)
-    img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\2.jpeg",0)
-    rgb_img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\1.jpeg",1)
-    rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\2.jpeg",1)
-    combine(rgb_img1,rgb_img2,"Set8-Combined-RGB")
+    img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\1.jpeg",0)
+    img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\2.jpeg",0)
+    rgb_img1 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\1.jpeg",1)
+    rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\2.jpeg",1)
+    combine(rgb_img1,rgb_img2,"Set9-Combined-RGB")
     diff=cv2.absdiff(img1,img2)
     thresh1 = cv2.adaptiveThreshold(diff,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
                         cv2.THRESH_BINARY,11,2)
     inverted=thresh1
     cv2.bitwise_not(thresh1,inverted)  #(src,dest)
-    combine(diff,inverted,"Set8-Difference_and_Thresholded")
+    combine(diff,inverted,"Set9-Difference_and_Thresholded")
     
     for i in range(2,6):
         for j in range(1,3):
-            rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set8\2.jpeg",1)
+            rgb_img2 = cv2.imread(r"E:\SmartIoTLab\Images\For_Study\Set9\2.jpeg",1)
             opening(i,j,inverted,rgb_img2,"Method-2")
    
 #calling the two diferent processing functions
@@ -59,8 +59,8 @@ def opening(i,j,open_i,rgb_img2,method):
     kernel = np.ones((i,i),np.uint8)
     opening = cv2.morphologyEx(open_i, cv2.MORPH_OPEN, kernel,iterations=j)
     rgb_img2,_,_ = annotate(opening,rgb_img2)
-    save(opening,"Set8-After morphological operation_"+method+"_kernel_"+str(i)+"iteration_"+str(j))
-    save(rgb_img2,"Set8-annotated_"+method+"_kernel_"+str(i)+"iteration_"+str(j))
+    save(opening,"Set9-After morphological operation_"+method+"_kernel_"+str(i)+"iteration_"+str(j))
+    save(rgb_img2,"Set9-annotated_"+method+"_kernel_"+str(i)+"iteration_"+str(j))
 
 
 function1()
