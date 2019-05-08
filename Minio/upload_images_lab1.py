@@ -9,6 +9,7 @@ from minio.error import (ResponseError, BucketAlreadyOwnedByYou,
                          BucketAlreadyExists)
 #Initialize camera module
 camera=PiCamera()
+camera.resolution = (1920,1080)
 start_time = time.time()
 # Initialize minioClient with an endpoint and access/secret keys.
 minioClient = Minio('172.18.22.9:9000',
@@ -25,9 +26,10 @@ try:
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d_%H:%M:%S')
     original_filepath = '/home/pi/cron'+st+'.jpeg'
     rotated_filepath = '/home/pi/cron/rotated_image.jpeg'
+    sleep(2)
     camera.capture(original_filepath)
     im1 = Image.open(original_filepath,mode='r')
-    im1 = ndimage.rotate(im1, 90)
+    im1 = ndimage.rotate(im1,-180)
     im = Image.fromarray(im1,mode='RGB')
     im.save(rotated_filepath,quality=100)
     minioClient.fput_object('iotlab1', (st+'.jpeg'), rotated_filepath)

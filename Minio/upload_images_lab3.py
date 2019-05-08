@@ -30,7 +30,7 @@ try:
     im1 = ndimage.rotate(im1, 90)
     im = Image.fromarray(im1,mode='RGB')
     im.save(rotated_filepath,quality=100)
-    minioClient.fput_object('iotlab3', (st+'.jpeg'), rotated_filepath)
+    minioClient.fput_object('iotlab31', (st+'.jpeg'), rotated_filepath)
     os.remove(rotated_filepath)
     os.remove(original_filepath) #Deleting the file after it has been uploaded to the object
 finally:
