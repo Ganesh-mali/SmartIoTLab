@@ -6,19 +6,12 @@ if(isset($_SESSION['user'])!="")
 }?>
 <?php include "includes/header.php"?>
 <?php include "functions.php"?>
-<style type="text/css">
-.container {
-   margin-top: 150px;
-}
-</style>
 <?php
     checkLogin();
     ?>
  <div class="container">
- <div class="col-sm-6 col-md-offset-4 col-lg-3">
-   <center><img src="img/CSRIoT_Logo1.png" width="90%"></img></center>
-	 <center><h5>(Alpha Version)</h5></center>
-    <h2>User Login Portal</h2>
+ <div class="col-sm-6 col-md-offset-4 col-lg-4">
+    <h2>Asset Management Admin Portal(CSRIoT Lab, VJTI)</h2>
 <form method="post">
 <table class="table table-bordered">
     <tr><td>
