@@ -134,29 +134,32 @@ function checkLogin(){
     //session_destroy();
     global $connection;
     if(isset($_POST['login'])){
-    $username=$_POST['username'];
-    $password=$_POST['password'];
-    $query1 = "SELECT password from users WHERE username='$username'";
-    $result1 = mysqli_query($connection,$query1);
-    $row=mysqli_fetch_assoc($result1);
-    $hash = $row['password'];
-    $total=mysqli_num_rows($result1);
-    mysqli_free_result($result1);
-    if($total==1){
-      echo "<script>console.log('".$count."')</script>";
-      $auth = password_verify($password, $hash);
-      if($auth==true){
-        $_SESSION['user'] = $username;
-        header("Location:home.php");
+      $username=$_POST['username'];
+      $password=$_POST['password'];
+      $stmt = mysqli_prepare($connection,"SELECT password from users WHERE username = ?");
+      mysqli_stmt_bind_param($stmt,'s',$username);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_bind_result($stmt, $hash);
+      mysqli_stmt_store_result($stmt);
+      $row=mysqli_stmt_fetch($stmt);
+      $total=mysqli_stmt_num_rows($stmt);
+      mysqli_free_result($result1);
+      mysqli_stmt_error($stmt );
+      if($total==1){
+        echo "<script>console.log('".$count."')</script>";
+        $auth = password_verify($password, $hash);
+        if($auth==true){
+          $_SESSION['user'] = $username;
+          header("Location:home.php");
+          }
+        else{
+          echo "Invalid Login Credentials.";
+        }
       }
       else{
-        echo "Invalid Login Credentials.";
+        echo "Invalid Username";
       }
     }
-    else{
-      echo "Invalid Login Credentials.";
-    }
-}
 }
 function getDeviceStatus(){
   $curl = curl_init("http://UhXVlAWRjbDq6W5WbWnBdF0iBZIjYJdN@172.18.22.9:8889/api/v1/session/show");
