@@ -26,15 +26,18 @@ if(!isset($_SESSION['user']))
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu </span>
   </div>
    <div class="container">
-    <div class="col-md-4 col-md-offset-4 col-lg-4">
+    <div class="col-md-4 col-md-offset-4">
       <div class="form-group">
         <br><br><br>
       <center><img src="img/CSRIoT_Logo1.png"></img></center>
       <br>
-      <?php
-      sayHello();
-      ?>
       </div>
+      <center>
+        <h5>MQTT Server Address: 172.18.22.9  Port:1886</h5>
+      <?php
+      getDeviceList();
+      ?>
+    </center>
     </div><!-- /.col-lg-12 -->
 </div><!-- /.row -->
   <?php include "includes/footer.php"?>

@@ -95,11 +95,11 @@ include "includes/header.php"?>
                 var snum=document.myform.secondNumber.value;
                 total=Number(fnum)+Number(snum);
                if(document.myform.captchaResult.value == ""){
-                    document.getElementById('helpBlock8').innerHTML = 'Please Enter the value for Captcha';
+                    document.getElementById('helpBlock8').innerHTML = 'Please Enter a value';
                     flag=1;
                 }
                 else if(total!=ctotal){
-                    document.getElementById('helpBlock8').innerHTML = 'Please Enter the values for Captcha Correctly';
+                    document.getElementById('helpBlock8').innerHTML = 'Please Enter the value correctly';
                     flag=1;
                 }
            }
@@ -112,6 +112,7 @@ include "includes/header.php"?>
                   document.getElementById('helpBlock5').innerHTML = "";
                   document.getElementById('helpBlock6').innerHTML = "";
                   document.getElementById('helpBlock7').innerHTML = "";
+                  document.getElementById('helpBlock8').innerHTML = "";
                   checkfname();
                   checklname();
                   checkmobile();
@@ -130,7 +131,7 @@ include "includes/header.php"?>
 
     </script>
         <div class="container">
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-md-offset-4 col-lg-5">
               <br><br><br>
             <center><img src="img/CSRIoT_Logo1.png"></img></center>
             <br>

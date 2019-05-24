@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['user'])!="")
+if(isset($_SESSION['user']))
 {
 	header("Location: home.php");
 }?>
@@ -11,14 +11,14 @@ if(isset($_SESSION['user'])!="")
    margin-top: 150px;
 }
 </style>
-<?php
-    checkLogin();
-    ?>
  <div class="container">
  <div class="col-sm-6 col-md-offset-4 col-lg-3">
    <center><img src="img/CSRIoT_Logo1.png" width="90%"></img></center>
-	 <center><h5>(Alpha Version)</h5></center>
+	 <center><h5>(Beta Version)</h5></center>
     <h2>User Login Portal</h2>
+		<h5 style="color:red"><?php
+		    checkLogin();
+		    ?></h5>
 <form method="post">
 <table class="table table-bordered">
     <tr><td>
@@ -37,10 +37,10 @@ if(isset($_SESSION['user'])!="")
         <button type="submit" name="login" class="btn btn-primary">Sign In</button>
     </td></tr>
     <tr><td>
-        <a href="password.php">Forgot Password?</a>
+        <a href="passwordreset.php">Forgot Password?</a>
     </td></tr>
     <tr><td>
-        <a href="register.php">Sign Up Here</a>
+        <a href="userregister.php">Sign Up Here</a>
     </td></tr>
 </table>
 </form>
