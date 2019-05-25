@@ -119,19 +119,21 @@ function registerDevice(){
     global $connection;
     if(isset($_POST['submit'])){
                 //echo "<script>console.log('Inside register device');</script>";
-                $mountpoint = $_SESSION['user'];
+                $userid = $_SESSION['user'];
                 $clientid=$_POST['clientid'];
                 $username=$_POST['username'];
                 $password=$_POST['password'];
                 $publishacl=$_POST['publishacl'];
+                $mountpoint ='';
                 $subscribeacl=$_POST['subscribeacl'];
-                $query="INSERT INTO vmq_auth_acl(mountpoint, client_id, username, password, publish_acl, subscribe_acl) ";
-                $query .="VALUES(?,?,?,MD5(?),?,?)";
+                $query="INSERT INTO vmq_auth_acl(mountpoint,userid, client_id, username, password, publish_acl, subscribe_acl) ";
+                $query .="VALUES(?,?,?,?,MD5(?),?,?)";
                 $stmt = mysqli_prepare($connection, $query);
-                mysqli_stmt_bind_param($stmt,'ssssss',$mountpoint,$clientid,$username,$password,$publishacl,$subscribeacl);
+                mysqli_stmt_bind_param($stmt,'sssssss',$mountpoint,$userid,$clientid,$username,$password,$publishacl,$subscribeacl);
                 $result = mysqli_stmt_execute($stmt);
                 if(!$result){
-                    echo "Database Error Occured. Please try again";
+
+                    echo "Database Error Occured. Please try again(Probably with differnt client-id and/or username)";
                   }
                 else{
                     echo "Your Device has been registered successfully";
@@ -200,7 +202,7 @@ function getDeviceList(){
     $olduname = $_SESSION['oldusername'];
     //echo "<script>alert('".$oldclientid."');</script>";
     //echo "<script>alert('".$olduname."');</script>";
-    $query="UPDATE vmq_auth_acl SET client_id=?, username =?, publish_acl=?, subscribe_acl=? WHERE mountpoint=? AND client_id=? and username=?";
+    $query="UPDATE vmq_auth_acl SET client_id=?, username =?, publish_acl=?, subscribe_acl=? WHERE userid=? AND client_id=? and username=?";
     $stmt = mysqli_prepare($connection, $query);
     mysqli_stmt_bind_param($stmt,'sssssss',$newclientid,$newuname,$publishacl,$subscribeacl,$username,$oldclientid,$olduname);
     $result = mysqli_stmt_execute($stmt);
@@ -218,13 +220,13 @@ function getDeviceList(){
     $usern = $_POST['username'];
     //echo "<script>alert(".$clientid.")</script>";
     //echo "<script>alert(".$usern.")</script>";
-    $stmt=mysqli_prepare($connection,"DELETE FROM vmq_auth_acl where mountpoint=? AND client_id = ? AND username =?");
+    $stmt=mysqli_prepare($connection,"DELETE FROM vmq_auth_acl where userid=? AND client_id = ? AND username =?");
     mysqli_stmt_bind_param($stmt,'sss',$username,$clientid,$usern);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
   }
   //echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
-  $stmt1=mysqli_prepare($connection,"SELECT client_id,username,publish_acl,subscribe_acl FROM vmq_auth_acl where mountpoint=?");
+  $stmt1=mysqli_prepare($connection,"SELECT client_id,username,publish_acl,subscribe_acl FROM vmq_auth_acl where userid=?");
   mysqli_stmt_bind_param($stmt1,'s',$username);
   mysqli_stmt_execute($stmt1);
   mysqli_stmt_bind_result($stmt1,$clientid,$username,$publishacl,$subscribeacl);
@@ -289,7 +291,7 @@ else{
 
             <!-- Form Name -->
 
-            <legend>MQTT Edit Device Details</legend>
+            <legend>Edit MQTT Device Details</legend>
   					<p id="success1" class="bg-success">
   					<?php
   					//function name
@@ -366,7 +368,7 @@ else{
         $username = $_POST['uname'];
         $publishacl = $_POST['publishacl'];
         $subscribeacl = $_POST['subscribeacl'];
-        $query="UPDATE vmq_auth_acl SET client_id=? AND username =? AND publish_acl=? AND subscribe_acl=? WHERE mountpoint=? AND client_id=? and username=?";
+        $query="UPDATE vmq_auth_acl SET client_id=? AND username =? AND publish_acl=? AND subscribe_acl=? WHERE userid=? AND client_id=? and username=?";
         $stmt = mysqli_prepare($connection, $query);
         mysqli_stmt_bind_param($stmt,'sssssss',$clientid,$username,$publishacl,$subscribeacl,$user,$olduname,$oldclientid);
         $result = mysqli_stmt_execute($stmt);

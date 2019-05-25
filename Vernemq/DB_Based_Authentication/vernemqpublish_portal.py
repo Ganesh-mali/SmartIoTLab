@@ -4,9 +4,9 @@ import time
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
  
-client = paho.Client(client_id="Client1",clean_session=True)
+client = paho.Client(client_id="Client2",clean_session=True)
 client.on_publish = on_publish
-client.username_pw_set("abcd","abcd")
+client.username_pw_set("pi1","raspberry")
 client.connect("172.18.22.9", 1886)
 client.loop_start()
  
